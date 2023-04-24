@@ -13,7 +13,7 @@
             </li>
             <li>
                 <a href="{{ route('admin.user.index') }}" class="{{ active('admin.user.index') }}">
-                    <i class="tim-icons icon-bullet-list-67"></i>
+                    <i class="fa fa-user"></i>
                     <p>{{ __('admin.nav.user') }}</p>
                 </a>
             </li>
