@@ -1,23 +1,11 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card ">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-8">
-                            <h4 class="card-title">Users</h4>
-                        </div>
-                        <div class="col-4 text-right">
-                            <a href="#" class="btn btn-sm btn-primary">{{ __('admin.label.add') }}</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    {{ $dataTable->table() }}
-                </div>
-            </div>
+    <div class="card p-3">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="mb-0">{{ __('admin.label.user') }}</h4>
+            <a href="#" class="btn btn-sm btn-primary">{{ __('admin.label.add') }}</a>
         </div>
+        {{ $dataTable->table() }}
     </div>
 @endsection
 
