@@ -42,6 +42,12 @@ Route::name('admin.')
                         Route::match(['get', 'post'], '/edit/{id?}', [UserController::class, 'edit'])->name('edit');
                         Route::get('/delete/{id?}', [UserController::class, 'delete'])->name('delete');
                     });
+
+                Route::name('category.')
+                    ->prefix('category')
+                    ->group(function () {
+                        Route::get('/', [CategoryController::class, 'index'])->name('index');
+                    });
             });
     });
 

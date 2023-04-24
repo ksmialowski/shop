@@ -4,6 +4,7 @@ return [
     'nav' => [
         'dashboard' => 'Dashboard',
         'user' => 'User',
+        'category' => 'Category',
     ],
     'label' => [
         'actions' => 'Actions',
@@ -18,6 +19,11 @@ return [
         'user' => 'User',
         'created_at' => 'Created At',
         'updated_at' => 'Updated At',
+        'category' => 'Category',
+        'slug' => 'Slug',
+        'description' => 'Description',
+        'order' => 'Order',
+        'color' => 'Color',
     ],
     'alert' => [
         'success' => [

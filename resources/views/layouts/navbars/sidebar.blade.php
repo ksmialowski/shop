@@ -18,6 +18,11 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('admin.category.index') }}" class="{{ active('admin.category.index') }}">
+                    <i class="fa fa-folder"></i>
+                    <p>{{ __('admin.nav.category') }}</p>
+                </a>
+            </li>
 {{--                <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">--}}
 {{--                    <i class="fab fa-laravel" ></i>--}}
 {{--                    <span class="nav-link-text" >{{ __('Laravel Examples') }}</span>--}}
