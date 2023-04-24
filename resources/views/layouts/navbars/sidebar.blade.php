@@ -1,8 +1,8 @@
 <div class="sidebar">
     <div class="sidebar-wrapper">
         <div class="logo">
-            <a href="#" class="simple-text logo-mini">S</a>
-            <a href="#" class="simple-text logo-normal">Shop</a>
+            <a href="#" class="simple-text logo-mini">{{ substr(config('app.name'), 0, 2) }}</a>
+            <a href="#" class="simple-text logo-normal">{{ config('app.name') }}</a>
         </div>
         <ul class="nav">
             <li>
