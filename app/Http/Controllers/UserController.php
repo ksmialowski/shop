@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\UserDataTable;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -9,11 +10,13 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $dataTable = new UserDataTable();
+        if (request()->ajax()){
+            $db = User::with([]);
+            return $dataTable->dataTable($db)->toJson();
+        }
 
-        return view('admin.user.index', [
-            'users' => $users,
-        ]);
+        return $dataTable->render('admin.user.index');
     }
 
     public function edit($id = 0)

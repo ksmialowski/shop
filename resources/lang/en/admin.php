@@ -6,6 +6,7 @@ return [
         'user' => 'User',
     ],
     'label' => [
+        'actions' => 'Actions',
         'add' => 'Add',
         'edit' => 'Edit',
         'delete' => 'Delete',
@@ -15,6 +16,8 @@ return [
         'email' => 'Email',
         'creation_date' => 'Creation Date',
         'user' => 'User',
+        'created_at' => 'Created At',
+        'updated_at' => 'Updated At',
     ],
     'alert' => [
         'success' => [

@@ -5,14 +5,14 @@
             <a href="#" class="simple-text logo-normal">Shop</a>
         </div>
         <ul class="nav">
-            <li @if ($pageSlug == 'dashboard') class="active " @endif>
-                <a href="{{ route('admin.home') }}">
+            <li>
+                <a href="{{ route('admin.home') }}" class="{{ active('admin.home') }}">
                     <i class="tim-icons icon-chart-pie-36"></i>
                     <p>{{ __('admin.nav.dashboard') }}</p>
                 </a>
             </li>
-            <li @if ($pageSlug == 'user') class="active " @endif>
-                <a href="{{ route('admin.user.index') }}">
+            <li>
+                <a href="{{ route('admin.user.index') }}" class="{{ active('admin.user.index') }}">
                     <i class="tim-icons icon-bullet-list-67"></i>
                     <p>{{ __('admin.nav.user') }}</p>
                 </a>
