@@ -14,8 +14,8 @@ class CategoryDataTable extends DataTable {
             ->eloquent($query)
             ->addColumn('actions', function ($item){
                 $actions = [
-                    'edit' => route('admin.category.edit', ['id' => $item->id]),
-                    'delete' => route('admin.category.delete', ['id' => $item->id]),
+                    'edit' => route('admin.category.edit', ['id' => $item->id_category]),
+                    'delete' => route('admin.category.delete', ['id' => $item->id_category]),
                 ];
                 return view('admin._layout.actions', $actions);
             })

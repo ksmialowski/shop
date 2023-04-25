@@ -18,7 +18,7 @@ class CategoryTableSeeder extends Seeder
     {
         $title = 'Category One';
         DB::table('category')->insert([
-            'id' => 1,
+            'id_category' => 1,
             'category_name' => $title,
             'category_slug' => Str::slug($title),
             'category_description' => Factory::create()->text(100),

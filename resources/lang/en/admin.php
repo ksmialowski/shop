@@ -26,6 +26,12 @@ return [
         'color' => 'Color',
         'password' => 'Password',
         're-password' => 'Re-password',
+        'category_name' => 'Category Name',
+        'category_slug' => 'Category Slug',
+        'category_description' => 'Category Description',
+        'category_order' => 'Category Order',
+        'category_color' => 'Category Color',
+        'category_status' => 'Category Status',
     ],
     'alert' => [
         'success' => [

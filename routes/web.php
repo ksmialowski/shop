@@ -47,6 +47,7 @@ Route::name('admin.')
                     ->prefix('category')
                     ->group(function () {
                         Route::get('/', [CategoryController::class, 'index'])->name('index');
+                        Route::match(['get', 'post'], '/edit/{id?}', [CategoryController::class, 'edit'])->name('edit');
                     });
             });
     });

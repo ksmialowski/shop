@@ -9,4 +9,11 @@ class Category extends Model {
     protected $primaryKey = 'id_category';
     protected $guarded = ['id_category'];
     protected $casts = [];
+
+    public static function rules(): array
+    {
+        return [
+            'category_name' => 'required',
+        ];
+    }
 }
