@@ -1,12 +1,12 @@
-@extends('layouts.app', ['page' => __('User Profile'), 'pageSlug' => 'user'])
+@extends('layouts.app')
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between">
-                    <h4 class="card-title">{{ __('admin.label.user') }}</h4>
-                    <h4><a href="{{ route('admin.user.index') }}">{{ __('admin.label.back') }}</a></h4>
+            <div class="card p-3">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <h4 class="mb-0">{{ __('admin.label.user') }}</h4>
+                    <a href="{{ route('admin.user.index') }}" class="btn btn-sm btn-primary">{{ __('admin.label.back') }}</a>
                 </div>
             </div>
         </div>
