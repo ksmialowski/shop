@@ -63,6 +63,21 @@ class UserController extends Controller
 
     public function delete($id = 0)
     {
-        dd(5);
+        $user = User::findOrFail($id);
+        DB::beginTransaction();
+        try {
+            $user->delete();
+
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            return redirect()->route('admin.user.index', ['id' => $user->id])
+                ->with('danger', [__('admin.alert.error.delete')]);
+        }
+
+        return redirect()->route('admin.user.index')
+            ->with('success', [__('admin.alert.success.delete')]);
+
     }
 }
