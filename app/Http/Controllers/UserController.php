@@ -76,7 +76,7 @@ class UserController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack();
 
-            return redirect()->route('admin.user.index', ['id' => $user->id])
+            return redirect()->route('admin.user.index')
                 ->with('danger', [__('admin.alert.error.delete')]);
         }
 
