@@ -17,7 +17,7 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
         $title = 'Category One';
-        DB::table('category')->insert([
+        DB::table('categories')->insert([
             'id_category' => 1,
             'category_name' => $title,
             'category_slug' => Str::slug($title),

@@ -5,6 +5,7 @@ return [
         'dashboard' => 'Dashboard',
         'user' => 'User',
         'category' => 'Category',
+        'product' => 'Product',
     ],
     'label' => [
         'actions' => 'Actions',
@@ -32,6 +33,12 @@ return [
         'category_order' => 'Category Order',
         'category_color' => 'Category Color',
         'category_status' => 'Category Status',
+        'product' => 'Product',
+        'type' => 'Type',
+        'price' => 'Price',
+        'quantity' => 'Quantity',
+        'specification' => 'Specification',
+        'status' => 'Status',
     ],
     'alert' => [
         'success' => [

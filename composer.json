@@ -14,7 +14,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "watson/active": "^6.0",
-        "yajra/laravel-datatables": "^1.5"
+        "yajra/laravel-datatables": "^1.5",
+      "ext-json": "*"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",

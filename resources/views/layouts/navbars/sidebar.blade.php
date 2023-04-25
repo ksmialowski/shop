@@ -23,6 +23,12 @@
                     <p>{{ __('admin.nav.category') }}</p>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.product.index') }}" class="{{ active('admin.product.index') }}">
+                    <i class="fa fa-desktop"></i>
+                    <p>{{ __('admin.nav.product') }}</p>
+                </a>
+            </li>
 {{--                <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">--}}
 {{--                    <i class="fab fa-laravel" ></i>--}}
 {{--                    <span class="nav-link-text" >{{ __('Laravel Examples') }}</span>--}}

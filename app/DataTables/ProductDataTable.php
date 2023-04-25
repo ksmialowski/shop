@@ -7,17 +7,25 @@ use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class CategoryDataTable extends DataTable {
+class ProductDataTable extends DataTable {
     public function dataTable($query)
     {
         return datatables()
             ->eloquent($query)
             ->addColumn('actions', function ($item){
                 $actions = [
-                    'edit' => route('admin.category.edit', ['id' => $item->id_category]),
-                    'delete' => route('admin.category.delete', ['id' => $item->id_category]),
+//                    'edit' => route('admin.product.edit', ['id' => $item->id_product]),
+//                    'delete' => route('admin.product.delete', ['id' => $item->id_product]),
                 ];
                 return view('admin._layout.actions', $actions);
+            })
+            ->editColumn('product_specification', function ($item){
+                $array = [];
+                foreach ($item->product_specification as $key => $specification){
+                    $array[] = '<li>' . $key . ': ' . $specification . '</li>';
+                }
+
+                return '<ul class="list-unstyled">' . implode('', $array) . '</ul>';
             })
             ->editColumn('created_at', function ($item){
                 return Carbon::parse($item->created_at)->diffForHumans();
@@ -27,6 +35,7 @@ class CategoryDataTable extends DataTable {
             })
             ->rawColumns([
                 'actions',
+                'product_specification'
             ]);
     }
 
@@ -38,7 +47,7 @@ class CategoryDataTable extends DataTable {
     public function html(): Builder
     {
         $builder = $this->builder();
-        $builder->setTableId('categories-table');
+        $builder->setTableId('products-table');
         $builder->columns($this->getColumns());
         $builder->orderBy(1, 'desc');
 
@@ -54,11 +63,14 @@ class CategoryDataTable extends DataTable {
                 ->width(120)
                 ->addClass('text-center')
                 ->title(__('admin.label.actions')),
-            Column::make('category_name')->title(__('admin.label.name')),
-            Column::make('category_slug')->title(__('admin.label.slug')),
-            Column::make('category_description')->title(__('admin.label.description')),
-            Column::make('category_order')->title(__('admin.label.order')),
-            Column::make('category_color')->title(__('admin.label.color')),
+            Column::make('product_name')->title(__('admin.label.name')),
+            Column::make('product_slug')->title(__('admin.label.slug')),
+            Column::make('product_type')->title(__('admin.label.type')),
+            Column::make('product_description')->title(__('admin.label.description')),
+            Column::make('product_price')->title(__('admin.label.price')),
+            Column::make('product_quantity')->title(__('admin.label.quantity')),
+            Column::make('product_specification')->title(__('admin.label.specification')),
+            Column::make('product_status')->title(__('admin.label.status')),
             Column::make('created_at')->title(__('admin.label.created_at')),
             Column::make('updated_at')->title(__('admin.label.updated_at')),
         ];
