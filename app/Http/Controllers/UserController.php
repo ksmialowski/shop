@@ -66,6 +66,10 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         DB::beginTransaction();
         try {
+            if ($user->id === auth()->user()->id) {
+                throw new \Exception('You can not delete yourself');
+            }
+
             $user->delete();
 
             DB::commit();
