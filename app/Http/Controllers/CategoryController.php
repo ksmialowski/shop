@@ -53,4 +53,23 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function delete($id = 0)
+    {
+        $category = Category::findOrFail($id);
+        DB::beginTransaction();
+        try {
+            $category->delete();
+
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            return redirect()->route('admin.category.index')
+                ->with('danger', [__('admin.alert.error.delete')]);
+        }
+
+        return redirect()->route('admin.category.index')
+            ->with('success', [__('admin.alert.success.delete')]);
+
+    }
 }
