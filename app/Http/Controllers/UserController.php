@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\DataTables\UserDataTable;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index()
     {
         $dataTable = new UserDataTable();
-        if (request()->ajax()){
+        if (request()->ajax()) {
             $db = User::with([]);
             return $dataTable->dataTable($db)->toJson();
         }
@@ -25,26 +26,34 @@ class UserController extends Controller
         if (request()->isMethod('POST')) {
             $post = request()->get('form');
 
-            $validator = validator($post, $this->rules());
+            $validator = validator($post, User::rules($id));
             if ($validator->fails()) {
-                return redirect()->route('admin.user.edit', ['id' => $user->id])->withErrors($validator);
+                return redirect()->route('admin.user.edit', ['id' => $user->id])
+                    ->with('danger', $validator->errors()->all())->withInput();
+            }
+
+            if (empty($post['password'])) {
+                unset($post['password']);
             }
 
             DB::beginTransaction();
-            try{
+            try {
                 $user->fill($post);
+                if (isset($post['password'])) {
+                    $user->password = Hash::make($post['password']);
+                }
                 $user->save();
 
                 DB::commit();
-            }
-            catch (\Exception $exception){
+            } catch (\Exception $exception) {
                 DB::rollBack();
 
-                return redirect()->route('admin.user.edit', ['id' => $user->id])->with('error', [__('admin.alert.error.edit')]);
+                return redirect()->route('admin.user.edit', ['id' => $user->id])
+                    ->with('danger', [__('admin.alert.error.edit')]);
             }
 
-            return redirect()->route('admin.user.edit', ['id' => $user->id])->with('success', [__('admin.alert.success.edit')]);
-
+            return redirect()->route('admin.user.edit', ['id' => $user->id])
+                ->with('success', [__('admin.alert.success.edit')]);
         }
 
         return view('admin.user.edit', [
@@ -55,13 +64,5 @@ class UserController extends Controller
     public function delete($id = 0)
     {
         dd(5);
-    }
-
-    private function rules(): array
-    {
-        return [
-//            'name' => 'required',
-            'email' => 'required|email',
-        ];
     }
 }

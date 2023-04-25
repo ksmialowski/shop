@@ -24,6 +24,8 @@ return [
         'description' => 'Description',
         'order' => 'Order',
         'color' => 'Color',
+        'password' => 'Password',
+        're-password' => 'Re-password',
     ],
     'alert' => [
         'success' => [

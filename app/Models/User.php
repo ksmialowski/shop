@@ -41,4 +41,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function rules(int $id): array
+    {
+        $rules = [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id . ',id',
+        ];
+
+        if (!$id) {
+            $rules['password'] = 'required|min:6';
+            $rules['re-password'] = 'required|same:password';
+        }
+
+        return $rules;
+    }
 }

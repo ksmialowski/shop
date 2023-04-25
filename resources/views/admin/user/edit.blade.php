@@ -17,17 +17,11 @@
                         @csrf
                         @include('alerts.alerts')
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                            <label>{{ __('admin.label.name') }}</label>
-                            <input type="text" name="form[name]" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('admin.label.name') }}" value="{{ $user->name }}">
-                            @include('alerts.feedback', ['field' => 'name'])
-                        </div>
+                        <x-input :type="'text'" :field="'name'" :value="$user->name" :errors="$errors" />
+                        <x-input :type="'email'" :field="'email'" :value="$user->email" :errors="$errors" />
+                        <x-input :type="'password'" :field="'password'" :errors="$errors" />
+                        <x-input :type="'password'" :field="'re-password'" :errors="$errors" />
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-                            <label>{{ __('admin.label.email') }}</label>
-                            <input type="email" name="form[email]" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('admin.label.email') }}" value="{{ $user->email }}">
-                            @include('alerts.feedback', ['field' => 'email'])
-                        </div>
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-fill btn-primary">{{ __('Save') }}</button>
