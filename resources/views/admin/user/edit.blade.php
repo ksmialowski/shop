@@ -17,10 +17,10 @@
                         @csrf
                         @include('alerts.alerts')
 
-                        <x-input :type="'text'" :field="'name'" :value="$user->name" :errors="$errors" />
-                        <x-input :type="'email'" :field="'email'" :value="$user->email" :errors="$errors" />
-                        <x-input :type="'password'" :field="'password'" :errors="$errors" />
-                        <x-input :type="'password'" :field="'re-password'" :errors="$errors" />
+                        <x-input type="text" field="name" :value="$user->name" />
+                        <x-input type="email" field="email" :value="$user->email" />
+                        <x-input type="password" field="password" />
+                        <x-input type="password" field="re-password" />
 
                     </div>
                     <div class="card-footer">

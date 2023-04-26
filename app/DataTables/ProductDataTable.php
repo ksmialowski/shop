@@ -14,8 +14,8 @@ class ProductDataTable extends DataTable {
             ->eloquent($query)
             ->addColumn('actions', function ($item){
                 $actions = [
-//                    'edit' => route('admin.product.edit', ['id' => $item->id_product]),
-//                    'delete' => route('admin.product.delete', ['id' => $item->id_product]),
+                    'edit' => route('admin.product.edit', ['id' => $item->id_product]),
+                    'delete' => route('admin.product.delete', ['id' => $item->id_product]),
                 ];
                 return view('admin._layout.actions', $actions);
             })

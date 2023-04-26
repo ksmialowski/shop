@@ -39,6 +39,15 @@ return [
         'quantity' => 'Quantity',
         'specification' => 'Specification',
         'status' => 'Status',
+        'select' => 'Select',
+        'product_name' => 'Product Name',
+        'id_category' => 'Category',
+        'product_slug' => 'Product Slug',
+        'product_description' => 'Product Description',
+        'product_price' => 'Product Price',
+        'product_quantity' => 'Product Quantity',
+        'product_type' => 'Product Type',
+        'product_status' => 'Product Status',
     ],
     'alert' => [
         'success' => [

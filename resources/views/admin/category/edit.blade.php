@@ -16,12 +16,12 @@
                     <div class="card-body">
                         @csrf
 
-                        <x-input :type="'text'" :field="'category_name'" :value="$category->category_name" :errors="$errors" />
-                        <x-input :type="'text'" :field="'category_slug'" :value="$category->category_slug" :errors="$errors" />
-                        <x-input :type="'text'" :field="'category_description'" :value="$category->category_description" :errors="$errors" />
-                        <x-input :type="'text'" :field="'category_order'" :value="$category->category_order" :errors="$errors" />
-                        <x-input :type="'color'" :field="'category_color'" :value="$category->category_color" :errors="$errors" />
-                        <x-checkbox :field="'category_status'" :value="$category->category_status" :errors="$errors" />
+                        <x-input type="text" field="category_name" :value="$category->category_name" />
+                        <x-input type="text" field="category_slug" :value="$category->category_slug" />
+                        <x-input type="text" field="category_description" :value="$category->category_description" />
+                        <x-input type="text" field="category_order" :value="$category->category_order" />
+                        <x-input type="color" field="category_color" :value="$category->category_color" />
+                        <x-checkbox field="category_status" :value="$category->category_status" />
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-fill btn-primary">{{ __('admin.label.save') }}</button>

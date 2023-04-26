@@ -3,7 +3,7 @@
     <div class="card p-3">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 class="mb-0">{{ __('admin.label.product') }}</h4>
-            <a href="#" class="btn btn-sm btn-primary">{{ __('admin.label.add') }}</a>
+            <a href="{{ route('admin.product.edit') }}" class="btn btn-sm btn-primary">{{ __('admin.label.add') }}</a>
         </div>
         {{ $dataTable->table() }}
     </div>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ProductDataTable;
+use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -20,44 +22,47 @@ class ProductController extends Controller
 
     public function edit($id = 0)
     {
-        $category = Category::findOrNew($id);
+        $product = Product::findOrNew($id);
+        $categories = Category::pluck('category_name', 'id_category')->toArray();
+
         if (request()->isMethod('POST')) {
             $post = request()->get('form');
 
-            $validator = validator($post, Category::rules());
+            $validator = validator($post, Product::rules());
             if ($validator->fails()) {
-                return redirect()->route('admin.category.edit', ['id' => $category->id_category])
-                    ->with('danger', $validator->errors()->all())->withInput();
+                return redirect()->route('admin.product.edit', ['id' => $product->id_category])
+                    ->withErrors($validator->errors())->withInput();
             }
 
             DB::beginTransaction();
             try {
-                $category->fill($post);
-                $category->save();
+                $product->fill($post);
+                $product->save();
 
                 DB::commit();
             } catch (\Exception $exception) {
                 DB::rollBack();
 
-                return redirect()->route('admin.category.edit', ['id' => $category->id_category])
+                return redirect()->route('admin.product.edit', ['id' => $product->id_product])
                     ->with('danger', [__('admin.alert.error.edit')]);
             }
 
-            return redirect()->route('admin.category.edit', ['id' => $category->id_category])
+            return redirect()->route('admin.product.edit', ['id' => $product->id_product])
                 ->with('success', [__('admin.alert.success.edit')]);
         }
 
-        return view('admin.category.edit', [
-            'category' => $category,
+        return view('admin.product.edit', [
+            'product' => $product,
+            'categories' => $categories,
         ]);
     }
 
     public function delete($id = 0)
     {
-        $category = Category::findOrFail($id);
+        $product = Product::findOrFail($id);
         DB::beginTransaction();
         try {
-            $category->delete();
+            $product->delete();
 
             DB::commit();
         } catch (\Exception $exception) {

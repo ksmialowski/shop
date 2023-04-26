@@ -12,4 +12,15 @@ class Product extends Model {
     protected $casts = [
         'product_specification' => Json::class,
     ];
+
+    public static function rules()
+    {
+        return [
+            'product_name' => 'required|string',
+            'id_category' => 'required|integer',
+            'product_price' => 'required|numeric',
+            'product_quantity' => 'required|integer',
+            'product_type' => 'required|string',
+        ];
+    }
 }
