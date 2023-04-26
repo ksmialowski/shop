@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Casts\Json;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model {
     protected $table = 'products';
@@ -12,6 +13,11 @@ class Product extends Model {
     protected $casts = [
         'product_specification' => Json::class,
     ];
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'id_category', 'id_category');
+    }
 
     public static function rules()
     {

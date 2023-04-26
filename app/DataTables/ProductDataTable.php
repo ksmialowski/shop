@@ -19,6 +19,9 @@ class ProductDataTable extends DataTable {
                 ];
                 return view('admin._layout.actions', $actions);
             })
+            ->editColumn('id_category', function ($item){
+                return $item->category->category_name;
+            })
             ->editColumn('product_specification', function ($item){
                 $array = [];
                 foreach ($item->product_specification as $key => $specification){
@@ -64,6 +67,7 @@ class ProductDataTable extends DataTable {
                 ->addClass('text-center')
                 ->title(__('admin.label.actions')),
             Column::make('product_name')->title(__('admin.label.name')),
+            Column::make('id_category')->title(__('admin.label.id_category')),
             Column::make('product_slug')->title(__('admin.label.slug')),
             Column::make('product_type')->title(__('admin.label.type')),
             Column::make('product_description')->title(__('admin.label.description')),
