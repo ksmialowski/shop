@@ -6,6 +6,7 @@ use App\DataTables\ProductDataTable;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -37,6 +38,7 @@ class ProductController extends Controller
             DB::beginTransaction();
             try {
                 $product->fill($post);
+                $product->product_slug = Str::slug($post['product_name']);
                 $product->save();
 
                 DB::commit();
