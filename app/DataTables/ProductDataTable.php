@@ -95,6 +95,6 @@ class ProductDataTable extends DataTable {
 
     protected function filename(): string
     {
-        return 'Category_' . date('YmdHis');
+        return 'Product_' . date('YmdHis');
     }
 }
