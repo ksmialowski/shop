@@ -19,6 +19,13 @@ class ProductDataTable extends DataTable {
                 ];
                 return view('admin._layout.actions', $actions);
             })
+            ->addColumn('product_photo', function ($item){
+                $product_photo = $item->photo->filter(function ($photo){
+                    return $photo->photo_type === 'thumbnail';
+                })->first();
+
+                return '<img src="' . asset('storage/' . $product_photo->photo_filepath) . '" class="img-fluid" width="100">';
+            })
             ->editColumn('id_category', function ($item){
                 return $item->category->category_name;
             })
@@ -38,7 +45,8 @@ class ProductDataTable extends DataTable {
             })
             ->rawColumns([
                 'actions',
-                'product_specification'
+                'product_specification',
+                'product_photo',
             ]);
     }
 
@@ -66,6 +74,7 @@ class ProductDataTable extends DataTable {
                 ->width(120)
                 ->addClass('text-center')
                 ->title(__('admin.label.actions')),
+            Column::make('product_photo')->title(__('admin.label.image')),
             Column::make('product_name')->title(__('admin.label.name')),
             Column::make('id_category')->title(__('admin.label.id_category')),
             Column::make('product_slug')->title(__('admin.label.slug')),

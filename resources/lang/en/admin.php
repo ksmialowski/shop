@@ -21,6 +21,7 @@ return [
         'created_at' => 'Created At',
         'updated_at' => 'Updated At',
         'category' => 'Category',
+        'image' => 'Image',
         'slug' => 'Slug',
         'description' => 'Description',
         'order' => 'Order',

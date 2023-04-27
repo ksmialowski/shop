@@ -15,7 +15,7 @@ class ProductController extends Controller
     {
         $dataTable = new ProductDataTable();
         if (request()->ajax()){
-            $db = Product::with(['category']);
+            $db = Product::with(['category', 'photo']);
             return $dataTable->dataTable($db)->toJson();
         }
 
