@@ -22,6 +22,7 @@ return [
         'updated_at' => 'Updated At',
         'category' => 'Category',
         'image' => 'Image',
+        'no_image' => 'No image',
         'slug' => 'Slug',
         'description' => 'Description',
         'order' => 'Order',

@@ -24,7 +24,11 @@ class ProductDataTable extends DataTable {
                     return $photo->photo_type === 'thumbnail';
                 })->first();
 
-                return '<img src="' . asset('storage/' . $product_photo->photo_filepath) . '" class="img-fluid" width="100">';
+                if ($product_photo) {
+                    return '<img src="' . asset('storage/' . $product_photo->photo_filepath) . '" class="img-fluid" width="100">';
+                }
+
+                return __('admin.label.no_image');
             })
             ->editColumn('id_category', function ($item){
                 return $item->category->category_name;
