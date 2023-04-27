@@ -48,6 +48,7 @@ return [
         'product_quantity' => 'Product Quantity',
         'product_type' => 'Product Type',
         'product_status' => 'Product Status',
+        'product_photo' => 'Product Photo',
     ],
     'alert' => [
         'success' => [

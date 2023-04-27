@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\ProductDataTable;
 use App\Models\Category;
 use App\Models\Product;
+use App\Services\Photo\PhotoService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -28,10 +29,12 @@ class ProductController extends Controller
 
         if (request()->isMethod('POST')) {
             $post = request()->get('form');
+            $images = request()->file('form.product_photo') ?? [];
+            $thumbnail = request()->file('form.product_thumbnail') ?? [];
 
             $validator = validator($post, Product::rules());
             if ($validator->fails()) {
-                return redirect()->route('admin.product.edit', ['id' => $product->id_category])
+                return redirect()->route('admin.product.edit', ['id' => $product->id_product])
                     ->withErrors($validator->errors())->withInput();
             }
 
@@ -40,6 +43,17 @@ class ProductController extends Controller
                 $product->fill($post);
                 $product->product_slug = Str::slug($post['product_name']);
                 $product->save();
+
+                if(!empty($images)) {
+                    $images = (new PhotoService($images))->upload();
+                }
+
+                if(!empty($thumbnail)) {
+                    $thumbnail = (new PhotoService($thumbnail, 'products', 'thumbnail'))->upload();
+                }
+
+                $id_photos = array_merge($images, $thumbnail);
+                $product->photo()->attach($id_photos);
 
                 DB::commit();
             } catch (\Exception $exception) {
