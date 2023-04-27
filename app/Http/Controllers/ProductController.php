@@ -24,7 +24,9 @@ class ProductController extends Controller
 
     public function edit($id = 0)
     {
-        $product = Product::findOrNew($id);
+        $product = $id > 0 ? Product::with(['photo'])->find($id) : new Product();
+        $images = $product->photo->where('photo_type', 'large')->pluck('photo_filepath')->toArray() ?? [];
+        $thumbnail = $product->photo->where('photo_type', 'thumbnail')->pluck('photo_filepath')->toArray() ?? [];
         $categories = Category::pluck('category_name', 'id_category')->toArray();
 
         if (request()->isMethod('POST')) {
@@ -69,6 +71,8 @@ class ProductController extends Controller
 
         return view('admin.product.edit', [
             'product' => $product,
+            'images' => $images,
+            'thumbnail' => $thumbnail,
             'categories' => $categories,
         ]);
     }
