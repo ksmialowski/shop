@@ -19,7 +19,7 @@
     </div>
 @endif
 
-<div class="">
+<div class="container">
     <span class="btn btn-raised btn-round btn-primary btn-file mb-3">
        <input type="file" name="{{ $name }}" {{ $attr }} />
     </span>
