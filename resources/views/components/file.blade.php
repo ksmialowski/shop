@@ -12,10 +12,18 @@
 <label class="form-control-label d-block mb-3">{{ __('admin.label.' . $field) }}</label>
 
 @if ($value)
-    <div class="row px-3 d-inline-flex">
-        @foreach ($value as $filepath)
-            <img src="{{ asset('storage/' . $filepath) }}" class="img-thumbnail w-25" alt="photo">
-        @endforeach
+    <div class="container mb-3">
+        <div class="row">
+            @foreach ($value as $key => $filepath)
+                @if ($key % 4 === 0 && $key !== 0)
+                    </div><div class="row">
+                @endif
+                <div class="col-sm">
+                    <div class="text-center"><img src="{{ asset('storage/' . $filepath) }}" class="img-thumbnail" style="width: 200px; height: 200px;" alt="photo"></div>
+                    <div class="text-center"><button class="btn btn-round btn-sm btn-danger">{{ __('admin.label.delete') }}</button></div>
+                </div>
+            @endforeach
+        </div>
     </div>
 @endif
 
