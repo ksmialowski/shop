@@ -36,3 +36,25 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.photo-delete', function (){
+                $.ajax({
+                    url: '{{ route('admin.product.delete-photo') }}',
+                    type: 'post',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id_photo: $(this).data('photo')
+                    },
+                    success: function (response) {
+                        if (response.status === 'success') {
+                            location.reload();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

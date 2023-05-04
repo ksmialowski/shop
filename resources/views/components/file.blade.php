@@ -14,13 +14,13 @@
 @if ($value)
     <div class="container mb-3">
         <div class="row">
-            @foreach ($value as $key => $filepath)
-                @if ($key % 4 === 0 && $key !== 0)
+            @foreach ($value as $key => $photo)
+                @if ($key % 5 === 0 && $key !== 0)
                     </div><div class="row">
                 @endif
                 <div class="col-sm">
-                    <div class="text-center"><img src="{{ asset('storage/' . $filepath) }}" class="img-thumbnail" style="width: 200px; height: 200px;" alt="photo"></div>
-                    <div class="text-center"><button class="btn btn-round btn-sm btn-danger">{{ __('admin.label.delete') }}</button></div>
+                    <div class="text-center"><img src="{{ asset('storage/' . $photo->photo_filepath) }}" class="img-thumbnail" style="width: 200px; height: 200px;" alt="photo"></div>
+                    <div class="text-center"><button type="button" class="btn btn-round btn-sm btn-danger photo-delete" data-photo="{{ $photo->id_photo }}">{{ __('admin.label.delete') }}</button></div>
                 </div>
             @endforeach
         </div>

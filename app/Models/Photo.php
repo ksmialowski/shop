@@ -10,4 +10,17 @@ class Photo extends Model {
     protected $primaryKey = 'id_photo';
     protected $guarded = ['id_photo'];
     protected $casts = [];
+
+    public function products()
+    {
+        return $this->morphedByMany(
+            Product::class,
+            'photoable',
+            'photoable',
+            'photo_id',
+            'photoable_id',
+            'id_photo',
+            'id_product',
+        )->withTimestamps();
+    }
 }

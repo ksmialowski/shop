@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\DataTables\ProductDataTable;
 use App\Models\Category;
+use App\Models\Photo;
 use App\Models\Product;
 use App\Services\Photo\PhotoService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -25,8 +27,8 @@ class ProductController extends Controller
     public function edit($id = 0)
     {
         $product = $id > 0 ? Product::with(['photo'])->find($id) : new Product();
-        $images = $product->photo->where('photo_type', 'large')->pluck('photo_filepath')->toArray() ?? [];
-        $thumbnail = $product->photo->where('photo_type', 'thumbnail')->pluck('photo_filepath')->toArray() ?? [];
+        $images = $product->photo->where('photo_type', 'large');
+        $thumbnail = $product->photo->where('photo_type', 'thumbnail');
         $categories = Category::pluck('category_name', 'id_category')->toArray();
 
         if (request()->isMethod('POST')) {
@@ -51,6 +53,16 @@ class ProductController extends Controller
                 }
 
                 if(!empty($thumbnail)) {
+                    if ($product->photo->where('photo_type', 'thumbnail')->count() > 0) {
+                        $p = $product->photo->where('photo_type', 'thumbnail')->first();
+                        $product->photo()->detach($p->id_photo);
+
+                        if(Storage::exists('public/' . $p->photo_filepath)) {
+                            Storage::delete('public/' . $p->photo_filepath);
+                        }
+
+                        $p->delete();
+                    }
                     $thumbnail = (new PhotoService($thumbnail, 'products', 'thumbnail'))->upload();
                 }
 
@@ -95,5 +107,35 @@ class ProductController extends Controller
         return redirect()->route('admin.category.index')
             ->with('success', [__('admin.alert.success.delete')]);
 
+    }
+
+    public function deletePhoto()
+    {
+        $id = request()->get('id_photo');
+        $photo = Photo::with(['products'])->findOrFail($id);
+        $filepath = $photo->photo_filepath;
+        DB::beginTransaction();
+        try {
+            $photo->delete();
+            $photo->products()->detach();
+
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Photo deleted unsuccessfully',
+            ]);
+        }
+
+        if(Storage::exists('public/' . $filepath)){
+            Storage::delete('public/' . $filepath);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Photo deleted successfully'
+        ]);
     }
 }
