@@ -3,6 +3,7 @@
     'field' => null,
     'options' => [],
     'selected' => null,
+    'withTranslations' => true,
 ])
 
 <div class="form-group {{ $errors->has($field) ? 'has-danger' : '' }}">
@@ -10,7 +11,7 @@
     <select name="form[{{ $field }}]" class="form-control {{ $errors->has($field) ? 'is-invalid' : '' }}">
         <option value="">{{ __('admin.label.select') }}</option>
         @foreach($options as $key => $value)
-            <option value="{{ $key }}" {{ $selected == $key ? 'selected' : '' }}>{{ $value }}</option>
+            <option value="{{ $key }}" {{ $selected == $key ? 'selected' : '' }}> {{ $withTranslations ? __('admin.label.' . $value) : $value  }}</option>
         @endforeach
     </select>
 

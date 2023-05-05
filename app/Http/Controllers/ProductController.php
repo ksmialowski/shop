@@ -30,6 +30,7 @@ class ProductController extends Controller
         $images = $product->photo->where('photo_type', 'large');
         $thumbnail = $product->photo->where('photo_type', 'thumbnail');
         $categories = Category::pluck('category_name', 'id_category')->toArray();
+        $product_type = config('admin.product_type', []);
 
         if (request()->isMethod('POST')) {
             $post = request()->get('form');
@@ -86,6 +87,7 @@ class ProductController extends Controller
             'images' => $images,
             'thumbnail' => $thumbnail,
             'categories' => $categories,
+            'product_type' => $product_type,
         ]);
     }
 

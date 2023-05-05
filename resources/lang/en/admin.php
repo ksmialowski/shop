@@ -52,6 +52,7 @@ return [
         'product_status' => 'Product Status',
         'product_photo' => 'Product Photo',
         'product_thumbnail' => 'Product Thumbnail',
+        'service' => 'Service',
     ],
     'alert' => [
         'success' => [

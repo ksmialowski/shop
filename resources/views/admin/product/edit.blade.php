@@ -18,9 +18,9 @@
                         @csrf
 
                         <x-input type="text" field="product_name" :value="$product->product_name" />
-                        <x-select field="id_category" :options="$categories" :selected="$product->id_category" />
+                        <x-select field="id_category" :options="$categories" :selected="$product->id_category" :withTranslations="false" />
                         <x-input type="text" field="product_slug" :value="$product->product_slug" attr="disabled" />
-                        <x-input type="text" field="product_type" :value="$product->product_type" />
+                        <x-select field="product_type" :options="$product_type" :selected="$product->product_type" />
                         <x-input type="text" field="product_description" :value="$product->product_description" />
                         <x-input type="number" field="product_price" :value="$product->product_price" />
                         <x-input type="number" field="product_quantity" :value="$product->product_quantity" />
