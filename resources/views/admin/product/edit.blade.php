@@ -24,6 +24,9 @@
                         <x-input type="text" field="product_description" :value="$product->product_description" />
                         <x-input type="number" field="product_price" :value="$product->product_price" />
                         <x-input type="number" field="product_quantity" :value="$product->product_quantity" />
+                        <div class="form-group">
+                            <a href="{{ route('admin.product.edit-specification', ['id' => $product->id_product]) }}" class="btn btn-fill btn-primary" type="button">{{ __('admin.label.specification') }}</a>
+                        </div>
                         <x-file field="product_photo" :value="$images" attr="multiple" />
                         <x-file field="product_thumbnail" :value="$thumbnail" />
                         <x-checkbox field="product_status" :value="$product->product_status" />

@@ -140,4 +140,42 @@ class ProductController extends Controller
             'message' => 'Photo deleted successfully'
         ]);
     }
+
+    public function editSpecification(int $id = 0) {
+        $product = Product::findOrFail($id);
+        if (request()->isMethod('POST')) {
+            $post = request()->all();
+            $product_specification = $post['form'] ?? [];
+            $newSpecifications = $post['new_specifications'] ?? [];
+
+            $specifications = [];
+            foreach ($newSpecifications as $specification) {
+                $specifications[$specification['key']] = $specification['value'];
+            }
+
+            DB::beginTransaction();
+            try {
+                $product->product_specification = $product_specification;
+
+                if(!empty($newSpecifications)) {
+                    $product->product_specification = array_merge($product_specification, $specifications);
+                }
+
+                $product->save();
+                DB::commit();
+            } catch (\Exception $exception) {
+                DB::rollBack();
+
+                return redirect()->route('admin.product.edit-specification', ['id' => $product->id_product])
+                    ->with('danger', [__('admin.alert.error.edit')]);
+            }
+
+            return redirect()->route('admin.product.edit-specification', ['id' => $product->id_product])
+                ->with('success', [__('admin.alert.success.edit')]);
+        }
+
+        return view('admin.product.edit-specification', [
+            'product' => $product,
+        ]);
+    }
 }
