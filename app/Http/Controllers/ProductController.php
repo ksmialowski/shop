@@ -93,20 +93,31 @@ class ProductController extends Controller
 
     public function delete($id = 0)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::with(['photo'])->findOrFail($id);
         DB::beginTransaction();
         try {
+            if($product->photo->count() > 0) {
+                foreach ($product->photo as $photo) {
+                    $product->photo()->detach($photo->id_photo);
+
+                    if(Storage::exists('public/' . $photo->photo_filepath)) {
+                        Storage::delete('public/' . $photo->photo_filepath);
+                    }
+
+                    $photo->delete();
+                }
+            }
             $product->delete();
 
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
 
-            return redirect()->route('admin.category.index')
+            return redirect()->route('admin.product.index')
                 ->with('danger', [__('admin.alert.error.delete')]);
         }
 
-        return redirect()->route('admin.category.index')
+        return redirect()->route('admin.product.index')
             ->with('success', [__('admin.alert.success.delete')]);
 
     }
