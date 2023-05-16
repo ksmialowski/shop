@@ -26,7 +26,7 @@ class ProductController extends Controller
 
     public function edit($id = 0)
     {
-        $product = $id > 0 ? Product::with(['photo'])->find($id) : new Product();
+        $product = $id > 0 ? Product::with(['photo'])->findOrFail($id) : new Product();
         $images = $product->photo->where('photo_type', 'large');
         $thumbnail = $product->photo->where('photo_type', 'thumbnail');
         $categories = Category::pluck('category_name', 'id_category')->toArray();
