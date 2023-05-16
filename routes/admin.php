@@ -45,5 +45,11 @@ Route::name('admin.')
                         Route::post('/delete-photo', [ProductController::class, 'deletePhoto'])->name('delete-photo');
                         Route::match(['get', 'post'], '/edit/{id?}/specification', [ProductController::class, 'editSpecification'])->name('edit-specification');
                     });
+
+                Route::name('config.')
+                    ->prefix('config')
+                    ->group(function () {
+                        Route::match(['get', 'post'], '/', [ConfigController::class, 'edit'])->name('edit');
+                    });
             });
     });

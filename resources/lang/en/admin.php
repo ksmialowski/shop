@@ -6,6 +6,7 @@ return [
         'user' => 'User',
         'category' => 'Category',
         'product' => 'Product',
+        'config' => 'Config',
     ],
     'label' => [
         'actions' => 'Actions',
@@ -54,6 +55,9 @@ return [
         'product_thumbnail' => 'Product Thumbnail',
         'service' => 'Service',
         'value' => 'Value',
+        'config' => 'Config',
+        'address' => 'Address',
+        'phone' => 'Phone',
     ],
     'alert' => [
         'success' => [

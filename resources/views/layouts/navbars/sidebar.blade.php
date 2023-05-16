@@ -29,6 +29,12 @@
                     <p>{{ __('admin.nav.product') }}</p>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.config.edit') }}" class="{{ active('admin.config.edit') }}">
+                    <i class="fa fa-cogs"></i>
+                    <p>{{ __('admin.nav.config') }}</p>
+                </a>
+            </li>
 {{--                <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">--}}
 {{--                    <i class="fab fa-laravel" ></i>--}}
 {{--                    <span class="nav-link-text" >{{ __('Laravel Examples') }}</span>--}}
