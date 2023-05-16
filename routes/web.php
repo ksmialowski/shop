@@ -1,8 +1,5 @@
 <?php
 
-namespace App\Http\Controllers;
-
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,73 +12,3 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-Route::name('admin.')
-    ->prefix('admin')
-    ->group(function () {
-        Route::get('/', [HomeController::class, 'index'])->name('home');
-        Route::middleware('auth')
-            ->group(function () {
-                Route::name('profile.')
-                    ->prefix('profile')
-                    ->group(function () {
-                        Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
-                        Route::put('/edit', [ProfileController::class, 'update'])->name('update');
-                        Route::put('/password', [ProfileController::class, 'password'])->name('password');
-                    });
-
-                Route::name('user.')
-                    ->prefix('user')
-                    ->group(function () {
-                        Route::get('/', [UserController::class, 'index'])->name('index');
-                        Route::match(['get', 'post'], '/edit/{id?}', [UserController::class, 'edit'])->name('edit');
-                        Route::get('/delete/{id?}', [UserController::class, 'delete'])->name('delete');
-                    });
-
-                Route::name('category.')
-                    ->prefix('category')
-                    ->group(function () {
-                        Route::get('/', [CategoryController::class, 'index'])->name('index');
-                        Route::match(['get', 'post'], '/edit/{id?}', [CategoryController::class, 'edit'])->name('edit');
-                        Route::get('/delete/{id?}', [CategoryController::class, 'delete'])->name('delete');
-                    });
-
-                Route::name('product.')
-                    ->prefix('product')
-                    ->group(function () {
-                        Route::get('/', [ProductController::class, 'index'])->name('index');
-                        Route::match(['get', 'post'], '/edit/{id?}', [ProductController::class, 'edit'])->name('edit');
-                        Route::get('/delete/{id?}', [ProductController::class, 'delete'])->name('delete');
-                        Route::post('/delete-photo', [ProductController::class, 'deletePhoto'])->name('delete-photo');
-                        Route::match(['get', 'post'], '/edit/{id?}/specification', [ProductController::class, 'editSpecification'])->name('edit-specification');
-                    });
-            });
-    });
-
-//Route::get('/home', [HomeController::class, 'index'])->name('home');
-//Auth::routes();
-//
-//Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
-//
-//Route::group(['middleware' => 'auth'], function () {
-//		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'App\Http\Controllers\PageController@icons']);
-//		Route::get('maps', ['as' => 'pages.maps', 'uses' => 'App\Http\Controllers\PageController@maps']);
-//		Route::get('notifications', ['as' => 'pages.notifications', 'uses' => 'App\Http\Controllers\PageController@notifications']);
-//		Route::get('rtl', ['as' => 'pages.rtl', 'uses' => 'App\Http\Controllers\PageController@rtl']);
-//		Route::get('tables', ['as' => 'pages.tables', 'uses' => 'App\Http\Controllers\PageController@tables']);
-//		Route::get('typography', ['as' => 'pages.typography', 'uses' => 'App\Http\Controllers\PageController@typography']);
-//		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'App\Http\Controllers\PageController@upgrade']);
-//});
-//
-//Route::group(['middleware' => 'auth'], function () {
-//	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
-//	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
-//	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
-//	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
-//});
-
