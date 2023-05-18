@@ -12,7 +12,8 @@
         </div>
         <div class="col-md-8">
             <div class="card">
-                <form method="post" action="{{ route('admin.category.edit', ['id' => $category->id_category]) }}" autocomplete="off">
+                <form method="post" action="{{ route('admin.category.edit', ['id' => $category->id_category]) }}"
+                      autocomplete="off" enctype="multipart/form-data">
                     <div class="card-body">
                         @csrf
 
@@ -21,6 +22,7 @@
                         <x-input type="text" field="category_description" :value="$category->category_description" />
                         <x-input type="text" field="category_order" :value="$category->category_order" />
                         <x-input type="color" field="category_color" :value="$category->category_color" />
+                        <x-file field="category_thumbnail" :value="$thumbnail" />
                         <x-checkbox field="category_status" :value="$category->category_status" />
                     </div>
                     <div class="card-footer">
@@ -31,3 +33,25 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.photo-delete', function (){
+                $.ajax({
+                    url: '{{ route('admin.category.delete-photo') }}',
+                    type: 'post',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id_photo: $(this).data('photo')
+                    },
+                    success: function (response) {
+                        if (response.status === 'success') {
+                            location.reload();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

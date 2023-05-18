@@ -36,6 +36,34 @@ class ConfigTableSeeder extends Seeder
                 'config_value' => 'example@example.com',
                 'created_at' => now(),
                 'updated_at' => now()
+            ],
+            [
+                'id_config' => 4,
+                'config_name' => 'facebook',
+                'config_value' => 'https://www.facebook.com/',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'id_config' => 5,
+                'config_name' => 'instagram',
+                'config_value' => 'https://www.instagram.com/',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'id_config' => 6,
+                'config_name' => 'twitter',
+                'config_value' => 'https://twitter.com/',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'id_config' => 7,
+                'config_name' => 'linkedin',
+                'config_value' => 'https://www.linkedin.com/',
+                'created_at' => now(),
+                'updated_at' => now()
             ]
         ];
 

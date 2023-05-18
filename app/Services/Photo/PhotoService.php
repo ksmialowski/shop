@@ -47,10 +47,10 @@ class PhotoService
             $photo->save();
 
             $id_photo = $photo->id_photo;
-
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
+            dd($exception);
         }
 
         return $id_photo ?? 0;

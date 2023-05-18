@@ -58,6 +58,7 @@ return [
         'config' => 'Config',
         'address' => 'Address',
         'phone' => 'Phone',
+        'category_thumbnail' => 'Category Thumbnail',
     ],
     'alert' => [
         'success' => [

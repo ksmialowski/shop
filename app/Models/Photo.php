@@ -23,4 +23,17 @@ class Photo extends Model {
             'id_product',
         )->withTimestamps();
     }
+
+    public function categories()
+    {
+        return $this->morphedByMany(
+            Category::class,
+            'photoable',
+            'photoable',
+            'photo_id',
+            'photoable_id',
+            'id_photo',
+            'id_category',
+        )->withTimestamps();
+    }
 }

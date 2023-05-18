@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Schema;
@@ -29,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         Relation::requireMorphMap();
         Relation::morphMap([
             'product' => Product::class,
+            'category' => Category::class,
         ]);
 
         Schema::defaultStringLength(191);

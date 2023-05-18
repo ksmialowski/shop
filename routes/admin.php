@@ -34,6 +34,7 @@ Route::name('admin.')
                         Route::get('/', [CategoryController::class, 'index'])->name('index');
                         Route::match(['get', 'post'], '/edit/{id?}', [CategoryController::class, 'edit'])->name('edit');
                         Route::get('/delete/{id?}', [CategoryController::class, 'delete'])->name('delete');
+                        Route::post('/delete-photo', [CategoryController::class, 'deletePhoto'])->name('delete-photo');
                     });
 
                 Route::name('product.')
